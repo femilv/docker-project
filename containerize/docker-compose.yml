@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    container_name: containerize_app_1
+    build: ./app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app/src:/usr/src/app
+    environment:
+      - NAME=World
+
+  nginx:
+    container_name: containerize_nginx_1
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - app
